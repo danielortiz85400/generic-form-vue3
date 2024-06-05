@@ -1,6 +1,6 @@
-import { QInput, QSelect, QCheckbox } from 'quasar';
 import { TCreateDataDriven } from './DatadrivenTypes';
 import { TSignin } from '../types/Signin';
+import { QCheckbox, QInput, QSelect } from 'quasar';
 
 /**
  Data driven: Tipo TCreateDataDriven. 
@@ -9,9 +9,9 @@ import { TSignin } from '../types/Signin';
  */
 export const DATA_DRIVEN: TCreateDataDriven<TSignin> = {
     email: {
-        type: 'QInput',
-        fieldPath: () => 'email',
-        def: { component: QInput, props: { dark: true} },
+        type: 'QInput', // Autocompletado
+        fieldPath: () => 'email',  // Autocompletado
+        def: { component: QInput, props: { dark: true } },  // Autocompletado
     },
     pass: {
         type: 'QSelect',
