@@ -36,5 +36,5 @@ const CREATE_DD = <TType extends TDefDataDrivenUnion['type']>(
    para representar un componente por cada clave.
  */
 export type TCreateDataDriven<TSchema = Record<string, string>> = {
-  [P in keyof TSchema]: ReturnType<typeof CREATE_DD> & { fieldPath: () => P };
+  [P in keyof TSchema]: ReturnType<typeof CREATE_DD> & { fieldPath: P };
 };

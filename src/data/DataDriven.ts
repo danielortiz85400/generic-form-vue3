@@ -10,12 +10,17 @@ import { QCheckbox, QInput, QSelect } from 'quasar';
 export const DATA_DRIVEN: TCreateDataDriven<TSignin> = {
     email: {
         type: 'QInput', // Autocompletado
+<<<<<<< HEAD
         fieldPath: () => 'email',  // Autocompletado
         def: { component: QInput, props: { dark: true } },  // Autocompletado
+=======
+        fieldPath: 'email',  // Autocompletado
+        def: { component: QInput, props: { dark: true, } },  // Autocompletado
+>>>>>>> dadb8ef (FIX: fieldPath type)
     },
     pass: {
         type: 'QSelect',
-        fieldPath: () => 'pass',
+        fieldPath: 'pass',
         def: {
             component: QSelect,
             props: { dark: true, options: ['vue+js', 'vue+ts'] },
@@ -23,7 +28,7 @@ export const DATA_DRIVEN: TCreateDataDriven<TSignin> = {
     },
     accept: {
         type: 'QCheckbox',
-        fieldPath: () => 'accept',
+        fieldPath: 'accept',
         def: {
             component: QCheckbox,
             props: { dark: true, color: 'blue-10', label: 'aceptar' },
