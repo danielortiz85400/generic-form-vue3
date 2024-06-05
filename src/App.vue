@@ -2,26 +2,28 @@
 import { signinSchema } from './validations/Schema';
 import { useGenericForm } from './composables/useGenericForm';
 import { ref } from 'vue';
-import { DATADRIVEN } from './data/DataDriven';
+import { DATA_DRIVEN } from './data/DataDriven';
 import { QBtn, QForm, QCard } from 'quasar';
 import { TSignin } from './types/Signin';
 
 
 // Valores iniciales
-const signin = ref<TSignin>({
+const SIGN_IN = ref<TSignin>({
   email: 'danielortizespitia8@gmail.com',
   pass: 'Autodidacta',
   accept: false
 });
 
-const { components, handleSubmit, wrapperModels } = useGenericForm<TSignin>({
-  validationSchema: signinSchema, // Esquema Yup
-  initVal: signin.value, // Valores iniciales para los componentes. (opcional)
-  dataDriven: DATADRIVEN, // Definicion de componentes según el esquema yup. (use tipo: TCreateDataDriven)
+const { components, handleSubmit, values } = useGenericForm<TSignin>({
+  validationSchema: signinSchema, // Esquema Yup (requerido)
+  initVal: SIGN_IN.value, // Valores iniciales para los componentes. (requerido)
+  dataDriven: DATA_DRIVEN, // Definicion de componentes tipo genérico. Use tipo TCreateDataDriven (requerido)
 });
 </script>
 
 <template>
+
+  <!-- Usa component para renderizar todos el formulario. -->
   <q-card class="bg-transparent q-pa-md">
     <h4>FORMULARIO GENÉRICO Y DINÁMICO</h4>
     <q-form @submit="handleSubmit" dark class="column q-gap-md">
@@ -30,7 +32,7 @@ const { components, handleSubmit, wrapperModels } = useGenericForm<TSignin>({
     </q-form>
     <div>
       v-models según el esquema:
-      <p>{{ wrapperModels }}</p>
+      <p>{{ values }}</p>
     </div>
   </q-card>
 </template>

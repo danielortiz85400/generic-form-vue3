@@ -1,7 +1,7 @@
 import { TQComps } from './QComponents';
 import { ComponentConstructor } from 'quasar';
 
-/** Definicion para crear data driven: Usa componentes de quasar. Intente vuetify,ant, etc... 
+/** Definición para crear data driven: Usa componentes de quasar.
  
  - type: Nombre del componente.
  - component: componente Quasar.
@@ -10,7 +10,7 @@ import { ComponentConstructor } from 'quasar';
 export type TDefDataDriven = {
   [K in keyof TQComps]: {
     type: K;
-    meta: {
+    def: {
       component: ComponentConstructor<TQComps[K]['component']>;
       props: Omit<TQComps[K]['props'], 'modelValue'>;
     };
@@ -19,21 +19,22 @@ export type TDefDataDriven = {
 
 type TDefDataDrivenUnion = TDefDataDriven[keyof TDefDataDriven];
 /** Crear data driven: Según el tipo de componente elegido, puede añadir los props del componente.*/
-const CREATEDD = <TType extends TDefDataDrivenUnion['type']>(
+const CREATE_DD = <TType extends TDefDataDrivenUnion['type']>(
   ...args: Extract<TDefDataDrivenUnion, { type: TType }> extends {
-    meta: infer TMetha;
+    def: infer TDef;
   }
-    ? [type: TType, meta: TMetha]
+    ? [type: TType, def: TDef]
     : [type: TType]
 ) =>
-({ type: args[0], meta: args[1] } as Extract<
+({ type: args[0], def: args[1] } as Extract<
   TDefDataDrivenUnion,
   { type: TType }
 >);
 
 /** Tipo para Crear data driven:
-  Toma el valor génerico del composable (que debe ser y es el mismo del esquema yup y valores iniciales), para crear un componente según las claves del esquema yup.
+  Toma el tipo genérico (que debe ser y es el mismo del esquema yup y valores iniciales),
+   para representar un componente por cada clave.
  */
 export type TCreateDataDriven<TSchema = Record<string, string>> = {
-  [P in keyof TSchema]: ReturnType<typeof CREATEDD> & { fieldPath: P };
+  [P in keyof TSchema]: ReturnType<typeof CREATE_DD> & { fieldPath: () => P };
 };

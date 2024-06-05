@@ -3,27 +3,28 @@ import { TCreateDataDriven } from './DatadrivenTypes';
 import { TSignin } from '../types/Signin';
 
 /**
- Usa el mismo tipo pasado a useGenericForm(), para crear componentes por cada clave. 
+ Data driven: Tipo TCreateDataDriven. 
+ Debe usar el mismo tipo genérico pasado a useGenericForm, para representar por clave
+ un componente o tendrá error de tipo. 
  */
-
-export const DATADRIVEN: TCreateDataDriven<TSignin> = {
+export const DATA_DRIVEN: TCreateDataDriven<TSignin> = {
     email: {
         type: 'QInput',
-        fieldPath: 'email',
-        meta: { component: QInput, props: { dark: true } },
+        fieldPath: () => 'email',
+        def: { component: QInput, props: { dark: true} },
     },
     pass: {
         type: 'QSelect',
-        fieldPath: 'pass',
-        meta: {
+        fieldPath: () => 'pass',
+        def: {
             component: QSelect,
             props: { dark: true, options: ['vue+js', 'vue+ts'] },
         },
     },
     accept: {
         type: 'QCheckbox',
-        fieldPath: 'accept',
-        meta: {
+        fieldPath: () => 'accept',
+        def: {
             component: QCheckbox,
             props: { dark: true, color: 'blue-10', label: 'aceptar' },
         },
