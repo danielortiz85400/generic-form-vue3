@@ -11,8 +11,8 @@
  */
 
 
-import { h } from 'vue';
-import { useForm } from 'vee-validate';
+import { MaybeRefOrGetter, h } from 'vue';
+import { Path, useForm } from 'vee-validate';
 import { ObjectSchema } from 'yup';
 import { errorSchemas } from '../validations/YupErrors';
 import { ComponentConstructor } from 'quasar';
@@ -23,7 +23,7 @@ interface TGenericFormArgs<T> {
     initVal: PartialDeep<T, {}>;
     dataDriven: {
         [P in keyof T]: {
-            fieldPath: (val: T[P]) => string
+            fieldPath: MaybeRefOrGetter<Path<T>>
             def: {
                 component: ComponentConstructor;
                 props: Record<string, any>;
