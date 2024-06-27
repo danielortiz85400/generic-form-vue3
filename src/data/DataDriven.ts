@@ -10,13 +10,11 @@ import { QCheckbox, QInput, QSelect } from 'quasar';
 export const DATA_DRIVEN: TCreateDataDriven<TSignin> = {
     email: {
         type: 'QInput', // Autocompletado
-<<<<<<< HEAD
-        fieldPath: () => 'email',  // Autocompletado
-        def: { component: QInput, props: { dark: true } },  // Autocompletado
-=======
         fieldPath: 'email',  // Autocompletado
-        def: { component: QInput, props: { dark: true, } },  // Autocompletado
->>>>>>> dadb8ef (FIX: fieldPath type)
+        def: { 
+            component: QInput, 
+            props: { dark: true } 
+        },  
     },
     pass: {
         type: 'QSelect',
